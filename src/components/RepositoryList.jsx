@@ -63,7 +63,8 @@ const RepositoryList = () => {
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({item}) =><RepositoryItem fullName={item.fullName} description={item.description}
        language={item.language} forksCount={item.forksCount} stargazersCount={item.stargazersCount}
-       ratingAverage={item.ratingAverage} reviewCount={item.reviewCount}/>}
+       ratingAverage={item.ratingAverage} reviewCount={item.reviewCount}
+       avatarImg={item.ownerAvatarUrl}/>}
       // other props
     />
   );
