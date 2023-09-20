@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     backgroundColor: theme.colors.bgAppBar,
-    paddingBottom: 15,
+    paddingBottom: 20,
     display: 'flex',
     flexDirection: 'row',
     paddingLeft: 3
@@ -14,13 +14,12 @@ const styles = StyleSheet.create({
     // ...
   },
   flexItem: {
-    flexGrow: 0,
     width: '30%',
   },
   text: {
    color: '#fff',
    fontWeight: 'bold',
-
+   paddingHorizontal: 5
   }
   // ...
 });
@@ -34,7 +33,7 @@ const AppBarTab = (props) => {
   return (
     <View style={styles.flexItem}>
       <Pressable onPress={handlePress}>
-        <Text style={ styles.text}>{tab}</Text>
+        <Text style={styles.text}>{tab}</Text>
       </Pressable>
     </View>
     )

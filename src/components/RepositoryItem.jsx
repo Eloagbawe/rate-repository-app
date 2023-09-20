@@ -6,31 +6,30 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   detailsContainer: {
     display: 'flex',
     flexDirection: 'row',
     paddingTop: 5,
     paddingBottom: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
     justifyContent: 'space-between',
     borderStyle: 'solid',
-    borderBottomWidth: 8,
+    borderBottomWidth: 10,
     borderColor: '#E1E5E7'
   },
   flexItemImg: {
-    flexGrow: 0,
     width: '25%',
    },
    flexItemDetails: {
-    flexGrow: 0,
     width: '75%',
    },
    avatarImg: {
-    width: 70,
-    height: 70,
-    borderRadius: 10,
+    width: 65,
+    height: 65,
+    borderRadius: 6,
    },
    name: {
     fontWeight: theme.fontWeights.bold,
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     marginBottom: 5
    },
    language: {
-    backgroundColor: '#0168D4',
+    backgroundColor: theme.colors.primary,
     color: '#ffffff',
     fontWeight: theme.fontWeights.bold,
     borderRadius: 5,
@@ -51,9 +50,31 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingTop:7,
     paddingBottom:7,
-
+    overflow: 'hidden'
+   },
+   countContainer: {
+    padding: 10
+   },
+   count: {
+    fontWeight: theme.fontWeights.bold,
+    marginBottom: 5,
+    textAlign: 'center',
+    fontSize: 15
+   },
+   countLabel: {
+    color: '#595959',
+     fontSize: 15
    }
 });
+
+const formatCount = (count) => {
+  if (count < 1000) {
+    return count;
+  } else {
+    const thousands = Math.round(count / 1000 * 10) / 10;
+    return `${thousands}k`
+  }
+}
 
 const RepositoryItem = (props) => {
   const { fullName, description, language,
@@ -72,28 +93,28 @@ const RepositoryItem = (props) => {
         <Text style={styles.name}>{fullName}</Text>
         <Text style={styles.description}>{description}</Text>
         <View style={{alignItems: 'baseline', marginTop: 8, marginBottom: 8}}>
-            <Text style={styles.language}>{language}</Text>
+          <Text style={styles.language}>{language}</Text>
         </View>
       </View>
        </View>
 
       <View style={styles.detailsContainer}>
-        <View>
-          <Text>{stargazersCount}</Text>
-          <Text>Stars</Text>
+        <View style={styles.countContainer}>
+          <Text style={styles.count}>{formatCount(stargazersCount)}</Text>
+          <Text style={styles.countLabel}>Stars</Text>
         </View>
-        <View>
-          <Text>{forksCount}</Text>
-          <Text>Forks</Text>
+        <View style={styles.countContainer}>
+          <Text style={styles.count}>{formatCount(forksCount)}</Text>
+          <Text style={styles.countLabel}>Forks</Text>
          </View>
-         <View>
-           <Text>{reviewCount}</Text>
-           <Text>Reviews</Text>
+         <View style={styles.countContainer}>
+           <Text style={styles.count}>{formatCount(reviewCount)}</Text>
+           <Text style={styles.countLabel}>Reviews</Text>
          </View>
 
-         <View>
-           <Text>{ratingAverage}</Text>
-           <Text>Rating</Text>
+         <View style={styles.countContainer}>
+           <Text style={styles.count}>{formatCount(ratingAverage)}</Text>
+           <Text style={styles.countLabel}>Rating</Text>
          </View>
       </View>
 
