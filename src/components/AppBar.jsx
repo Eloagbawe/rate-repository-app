@@ -1,4 +1,6 @@
 import { View, StyleSheet, Text, Pressable } from 'react-native';
+import { Link } from 'react-router-native';
+
 import Constants from 'expo-constants';
 import theme from '../theme'
 
@@ -14,18 +16,21 @@ const styles = StyleSheet.create({
     // ...
   },
   flexItem: {
-    width: '30%',
+    width: '25%',
   },
   text: {
    color: '#fff',
    fontWeight: 'bold',
    paddingHorizontal: 5
+  },
+  link: {
+    width: '100%'
   }
   // ...
 });
 
 const AppBarTab = (props) => {
-  const {tab} = props;
+  const { tab, route } = props;
   const handlePress = () => {
     console.log('pressed')
   }
@@ -33,7 +38,9 @@ const AppBarTab = (props) => {
   return (
     <View style={styles.flexItem}>
       <Pressable onPress={handlePress}>
-        <Text style={styles.text}>{tab}</Text>
+        <Link to={route}>
+          <Text style={styles.text}>{tab}</Text>
+        </Link>
       </Pressable>
     </View>
     )
@@ -43,7 +50,8 @@ const AppBar = () => {
 
   return (
     <View style={styles.container}>
-      <AppBarTab tab={'Repositories'}/>
+      <AppBarTab tab={'Repositories'} route={"/"}/>
+      <AppBarTab tab={'Sign In'} route={"/sign-in"}/>
     </View>)
 };
 
