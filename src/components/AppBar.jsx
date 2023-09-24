@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   },
   flexItem: {
     // width: '25%',
+    marginRight: 20
   },
   scrollView: {
     height: '100%',
@@ -31,7 +32,6 @@ const styles = StyleSheet.create({
   link: {
     width: '100%'
   }
-  // ...
 });
 
 const AppBarTab = (props) => {
