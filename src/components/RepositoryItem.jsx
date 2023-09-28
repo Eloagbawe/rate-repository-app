@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
    },
    name: {
     fontWeight: theme.fontWeights.bold,
-    marginTop: 5,
     marginBottom: 5,
     fontSize: theme.fontSizes.subheading
    },
