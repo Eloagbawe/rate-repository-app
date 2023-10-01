@@ -81,7 +81,7 @@ const RepositoryItem = (props) => {
   forksCount, stargazersCount, ratingAverage,
   reviewCount, avatarImg} = props;
   return (
-    <View>
+    <View testID="repositoryItem">
     <View style={styles.container}>
       <View style={styles.flexItemImg}>
         <Image
@@ -90,30 +90,30 @@ const RepositoryItem = (props) => {
         />
       </View>
       <View style={styles.flexItemDetails}>
-        <Text style={styles.name}>{fullName}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.name} testID="fullName">{fullName}</Text>
+        <Text style={styles.description} testID="description">{description}</Text>
         <View style={{alignItems: 'baseline', marginTop: 8, marginBottom: 8}}>
-          <Text style={styles.language}>{language}</Text>
+          <Text style={styles.language} testID="language">{language}</Text>
         </View>
       </View>
        </View>
 
       <View style={styles.detailsContainer}>
         <View style={styles.countContainer}>
-          <Text style={styles.count}>{formatCount(stargazersCount)}</Text>
-          <Text style={styles.countLabel}>Stars</Text>
+          <Text style={styles.count} testID="stargazersCount">{formatCount(stargazersCount)}</Text>
+          <Text style={styles.countLabel} testID="stars">Stars</Text>
         </View>
         <View style={styles.countContainer}>
-          <Text style={styles.count}>{formatCount(forksCount)}</Text>
+          <Text style={styles.count} testID="forksCount">{formatCount(forksCount)}</Text>
           <Text style={styles.countLabel}>Forks</Text>
          </View>
          <View style={styles.countContainer}>
-           <Text style={styles.count}>{formatCount(reviewCount)}</Text>
+           <Text style={styles.count} testID="reviewCount">{formatCount(reviewCount)}</Text>
            <Text style={styles.countLabel}>Reviews</Text>
          </View>
 
          <View style={styles.countContainer}>
-           <Text style={styles.count}>{formatCount(ratingAverage)}</Text>
+           <Text style={styles.count} testID="ratingAverage">{formatCount(ratingAverage)}</Text>
            <Text style={styles.countLabel}>Rating</Text>
          </View>
       </View>
