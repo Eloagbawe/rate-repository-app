@@ -37,20 +37,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const SignInForm = ({ onSubmit }) => {
-  return (
-    <View>
-      <FormikTextInput name="username" placeholder="Username" fieldStyle={styles.input}/>
-      <FormikTextInput name="password" placeholder="Password" fieldStyle={styles.input} secureTextEntry/>
-      <Pressable onPress={onSubmit}>
-        <Text style={styles.btn}>Sign In</Text>
-      </Pressable>
-    </View>
-  )
-}
-const SignIn = () => {
-  const [signIn] = useSignIn();
-  const navigate = useNavigate();
+export const SignInContainer = ({ onSubmit }) => {
 
   const SignInSchema = Yup.object().shape({
     username: Yup.string()
@@ -58,6 +45,33 @@ const SignIn = () => {
     password: Yup.string()
       .required('Password is required')
   })
+
+  const initialValues = {
+    username: '',
+    password: '',
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.heading}>Sign In</Text>
+      <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={SignInSchema}>
+      {({ handleSubmit }) => 
+        <View>
+          <FormikTextInput name="username" placeholder="Username" fieldStyle={styles.input}/>
+          <FormikTextInput name="password" placeholder="Password" fieldStyle={styles.input} secureTextEntry/>
+          <Pressable onPress={handleSubmit}>
+            <Text style={styles.btn}>Submit</Text>
+          </Pressable>
+        </View> 
+      }
+      </Formik>
+    </View>
+  )
+}
+
+const SignIn = () => {
+  const [signIn] = useSignIn();
+  const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
@@ -70,18 +84,8 @@ const SignIn = () => {
       console.log(e);
     }
   };
-  const initialValues = {
-    username: '',
-    password: '',
-  };
-  
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Sign In</Text>
-      <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={SignInSchema}>
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
-    </Formik>
-    </View>
+    <SignInContainer onSubmit={onSubmit} />
   )
 };
 
