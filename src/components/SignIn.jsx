@@ -4,7 +4,8 @@ import theme from '../theme';
 import Text from './Text';
 import FormikTextInput from './FormikTextInput';
 import * as Yup from 'yup';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-native";
+
 import useSignIn from '../hooks/useSignIn';
 
 const styles = StyleSheet.create({
