@@ -77,6 +77,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal style={styles.scrollView}>
         <AppBarTab tab={'Repositories'} route={"/"} link={true}/>
+        { data?.me &&  <AppBarTab tab={'Create a review'} route={"/create_review"} link={true}/>} 
         {data?.me ?  <AppBarTab tab={'Sign Out'} handleClick={logout}/> : 
          <AppBarTab tab={'Sign In'} route={"/sign-in"} link={true}/>}
       </ScrollView>
