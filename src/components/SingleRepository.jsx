@@ -76,7 +76,7 @@ const ReviewItem = ({ review }) => {
         </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.username}>{review?.user?.username}</Text>
-          <Text style={styles.createdText}>{format(new Date(review?.createdAt), 'dd.mm.yyyy')}</Text>
+          <Text style={styles.createdText}>{format(new Date(review?.createdAt), 'dd.MM.yyyy')}</Text>
           <Text style={styles.reviewText}>{review?.text}</Text>
         </View>
       </View>

@@ -7,7 +7,7 @@ import Constants from 'expo-constants';
 import theme from '../theme'
 import useAuthStorage  from '../hooks/useAuthStorage';
 import { useApolloClient } from '@apollo/client';
-
+import { useNavigate } from "react-router-native";
 
 
 const styles = StyleSheet.create({
@@ -59,6 +59,7 @@ const AppBarTab = (props) => {
 }
 
 const AppBar = () => {
+  const navigate = useNavigate();
   const { data } = useQuery(GET_ME, {
     fetchPolicy: 'cache-and-network',
   });
@@ -70,6 +71,7 @@ const AppBar = () => {
   const logout = () => {
     authStorage.removeAccessToken().then(() => {
       apolloClient.resetStore();
+      navigate("/")
     })
   }
 
@@ -77,7 +79,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal style={styles.scrollView}>
         <AppBarTab tab={'Repositories'} route={"/"} link={true}/>
-        { data?.me &&  <AppBarTab tab={'Create a review'} route={"/create_review"} link={true}/>} 
+        {data?.me &&  <AppBarTab tab={'Create a review'} route={"/create_review"} link={true}/>} 
         {data?.me ?  <AppBarTab tab={'Sign Out'} handleClick={logout}/> : 
          <AppBarTab tab={'Sign In'} route={"/sign-in"} link={true}/>}
       </ScrollView>
