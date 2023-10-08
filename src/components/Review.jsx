@@ -4,7 +4,8 @@ import theme from '../theme';
 import Text from './Text';
 import FormikTextInput from './FormikTextInput';
 import * as Yup from 'yup';
-// import { useNavigate } from "react-router-native";
+import useReview from '../hooks/useReview';
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -47,7 +48,7 @@ export const CreateReviewContainer = ({ onSubmit }) => {
       .required('Rating is required')
       .min(0)
       .max(100),
-    review: Yup.string()
+    text: Yup.string()
       .optional()
   })
 
@@ -55,7 +56,7 @@ export const CreateReviewContainer = ({ onSubmit }) => {
     ownerName: '',
     repositoryName: '',
     rating: '',
-    review: ''
+    text: ''
   };
 
   return (
@@ -67,7 +68,7 @@ export const CreateReviewContainer = ({ onSubmit }) => {
           <FormikTextInput name="ownerName" placeholder="Repository owner name" fieldStyle={styles.input}/>
           <FormikTextInput name="repositoryName" placeholder="Repository Name" fieldStyle={styles.input}/>
           <FormikTextInput name="rating" placeholder="Rating between 0 and 100" fieldStyle={styles.input}/>
-          <FormikTextInput name="review" placeholder="Review" fieldStyle={styles.input} multiline={true}/>
+          <FormikTextInput name="text" placeholder="Review" fieldStyle={styles.input} multiline={true}/>
           <Pressable onPress={handleSubmit}>
             <Text style={styles.btn}>Create a review</Text>
           </Pressable>
@@ -79,9 +80,19 @@ export const CreateReviewContainer = ({ onSubmit }) => {
 }
 
 const CreateReview = () => {
+  const [create_review] = useReview();
+  const navigate = useNavigate();
 
   const onSubmit = async (values) => {
-    console.log(values)
+    const {ownerName, repositoryName, rating, text} = values;
+    try {
+      const res = await create_review({ownerName, repositoryName, rating: parseInt(rating), text});
+      if (res) {
+        navigate(`/repositories/${res?.createReview?.repositoryId}`)
+      }
+    } catch(e){
+      console.log(e);
+    }
   };
   return (
     <CreateReviewContainer onSubmit={onSubmit} />
