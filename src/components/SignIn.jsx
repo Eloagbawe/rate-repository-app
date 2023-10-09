@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-native";
 
 import useSignIn from '../hooks/useSignIn';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     padding: 20
   },
