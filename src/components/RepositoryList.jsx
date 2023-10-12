@@ -1,12 +1,21 @@
+import { useState } from 'react';
 import { FlatList, View, StyleSheet, Pressable } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 import { useNavigate } from "react-router-native";
+import { Button, Menu } from 'react-native-paper';
+
 
 const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
+  menuItem: {
+    color: '#000000'
+  },
+  button: {
+    color: '#000000'
+  }
 });
 
 // const repositories = [
@@ -58,6 +67,41 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
+const SortRepositoryMenu = () => {
+  const [visible, setVisible] = useState(false);
+  const [selected, setSelected] = useState('Latest repositories')
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
+
+  
+  const handleChange = (title) => {
+    setSelected(title)
+    closeMenu()
+  }
+
+  return (
+    <View
+      style={{
+        paddingVertical: 5,
+        flexDirection: 'row',
+      }}>
+      <Menu
+        contentStyle={{
+          backgroundColor: '#ffffff',
+        }}
+        visible={visible}
+        onDismiss={closeMenu}
+        anchor={<Button onPress={openMenu}>Sort By - {selected}</Button>}>
+        <Menu.Item onPress={() => handleChange('Latest repositories')} title="Latest repositories" />
+        <Menu.Item onPress={() => handleChange('Highest rated repositories')} title="Highest rated repositories" />
+        <Menu.Item  onPress={() => handleChange('Lowest rated repositories')} title="Lowest rated repositories" />
+      </Menu>
+    </View>
+  )
+}
+
 export const RepositoryListContainer = ({ repositories }) => {  
   const navigate = useNavigate()
 
@@ -70,6 +114,7 @@ export const RepositoryListContainer = ({ repositories }) => {
 
   return (
     <FlatList
+      ListHeaderComponent={() => <SortRepositoryMenu/>}
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({item}) =>
@@ -77,16 +122,17 @@ export const RepositoryListContainer = ({ repositories }) => {
         <RepositoryItem repositoryData={item}/>
       </Pressable>
       }
-      // other props
     />
   );
 };
 
 const RepositoryList = () => {
   const { repositories } = useRepositories();
-
+  
   return (
+    
     <RepositoryListContainer repositories={repositories}/>
+
   )
 
 }
