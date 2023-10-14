@@ -82,6 +82,7 @@ const AppBar = () => {
         {data?.me ?
         <>
           <AppBarTab tab={'Create a review'} route={"/create_review"} link={true}/>
+          <AppBarTab tab={'My reviews'} route={"/reviews"} link={true}/>
           <AppBarTab tab={'Sign Out'} handleClick={logout}/>
         </> : 
         <>

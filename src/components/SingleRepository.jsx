@@ -67,7 +67,7 @@ const RepositoryInfo = ({ repository }) => {
   return <RepositoryItem repositoryData={{...repository, detailMode: true}}/>
 };
 
-const ReviewItem = ({ review }) => {
+export const ReviewItem = ({ review }) => {
   return (
     <View style={styles.bottomBorder}>
       <View style={styles.reviewContainer}>
