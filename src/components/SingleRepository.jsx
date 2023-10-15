@@ -69,16 +69,14 @@ const RepositoryInfo = ({ repository }) => {
 
 export const ReviewItem = ({ review }) => {
   return (
-    <View style={styles.bottomBorder}>
-      <View style={styles.reviewContainer}>
-        <View style={styles.ratingContainer}>
-          <Text style={styles.ratingText}>{review.rating}</Text>
-        </View>
-        <View style={styles.detailsContainer}>
-          <Text style={styles.username}>{review?.user?.username}</Text>
-          <Text style={styles.createdText}>{format(new Date(review?.createdAt), 'dd.MM.yyyy')}</Text>
-          <Text style={styles.reviewText}>{review?.text}</Text>
-        </View>
+    <View style={styles.reviewContainer}>
+      <View style={styles.ratingContainer}>
+        <Text style={styles.ratingText}>{review.rating}</Text>
+      </View>
+      <View style={styles.detailsContainer}>
+        <Text style={styles.username}>{review?.user?.username}</Text>
+        <Text style={styles.createdText}>{format(new Date(review?.createdAt), 'dd.MM.yyyy')}</Text>
+        <Text style={styles.reviewText}>{review?.text}</Text>
       </View>
     </View>
   )
@@ -98,7 +96,11 @@ const SingleRepository = () => {
     <FlatList
       data={reviews}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => <ReviewItem review={item} />}
+      renderItem={({ item }) => 
+      <View style={styles.bottomBorder}>
+        <ReviewItem review={item} />
+      </View>
+      }
       keyExtractor={({ id }) => id}
       ListHeaderComponent={() => <RepositoryInfo repository={data} />}
       // ...
