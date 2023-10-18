@@ -84,7 +84,7 @@ export const ReviewItem = ({ review }) => {
 
 const SingleRepository = () => {
   const { id } = useParams();
-  const { repository } = useRepository({id});
+  const { repository, fetchMore } = useRepository({id, first: 4});
 
   const data = repository?.repository;
 
@@ -92,10 +92,16 @@ const SingleRepository = () => {
   ? data.reviews?.edges?.map(edge => edge.node)
   : [];
 
+  const onEndReach = () => {
+    fetchMore()
+  }
+
   return (
     <FlatList
       data={reviews}
       ItemSeparatorComponent={ItemSeparator}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
       renderItem={({ item }) => 
       <View style={styles.bottomBorder}>
         <ReviewItem review={item} />
