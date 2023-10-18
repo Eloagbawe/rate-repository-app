@@ -13,7 +13,6 @@ const useRepository = ({id, first, after}) => {
       if (!canFetchMore) {
         return;
       }
-      console.log('load more')
       fetchMore({
         variables: {
           after: data.repository.reviews.pageInfo.endCursor,
